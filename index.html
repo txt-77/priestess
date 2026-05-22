@@ -1,6 +1,8 @@
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Verdana&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
   .y2k-root {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 13px;
@@ -9,7 +11,22 @@
     padding: 0;
     margin: 0;
     min-height: 600px;
+    position: relative;
   }
+  .y2k-root::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
   .y2k-root * { box-sizing: border-box; }
   .titlebar {
     background: linear-gradient(to right, #000080, #1084d0);
@@ -332,9 +349,286 @@
     cursor: pointer;
     font-family: Verdana, sans-serif;
   }
-</style>
+  .membros{
+    font-size: 11px;
+    color: purple;
+  }
+  #error-overlay.show { display: flex !important; }
 
-<div class="y2k-root">
+  #hack-screen {
+    display: none;
+    background: #1a0000;
+    min-height: 100vh;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    color: #ff2200;
+    position: relative;
+    overflow: hidden;
+  }
+  #hack-screen.ativo { display: block; }
+
+  /* glitch no título */
+  .hack-header {
+    text-align: center;
+    padding: 18px 0 6px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff2200;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    animation: glitch-title 2.5s infinite;
+    position: relative;
+  }
+  @keyframes glitch-title {
+    0%,90%,100% { text-shadow: none; transform: none; }
+    92% { text-shadow: 3px 0 #fff, -3px 0 #ff2200; transform: skewX(5deg); }
+    94% { text-shadow: -3px 0 #fff, 3px 0 #ff2200; transform: skewX(-4deg); }
+    96% { text-shadow: 2px 0 #0ff, -2px 0 #ff2200; transform: none; }
+  }
+
+  .hack-subtitle {
+    text-align: center;
+    color: #ff6644;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    animation: blink-red 1.2s step-start infinite;
+  }
+  @keyframes blink-red { 50% { opacity: 0; } }
+
+  .hack-divider {
+    border: none;
+    border-top: 1px solid #ff2200;
+    margin: 0 30px 18px;
+    opacity: 0.4;
+  }
+
+  .hack-body {
+    display: flex;
+    gap: 0;
+    padding: 0 24px;
+  }
+
+  .hack-left {
+    flex: 1;
+    padding-right: 24px;
+    border-right: 1px solid #550000;
+  }
+
+  .hack-right {
+    width: 220px;
+    padding-left: 20px;
+  }
+
+  .hack-section-title {
+    color: #ff4400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #550000;
+    padding-bottom: 3px;
+  }
+
+  .hack-log {
+    font-size: 11px;
+    color: #cc2200;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .hack-log span { color: #ff5500; }
+  .hack-log .ok { color: #ff9900; }
+  .hack-log .warn { color: #ffcc00; }
+
+  .hack-revelacao {
+    background: #2a0000;
+    border: 1px solid #ff2200;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #ff8866;
+    animation: glitch-box 4s infinite;
+  }
+  @keyframes glitch-box {
+    0%,95%,100% { box-shadow: none; }
+    96% { box-shadow: 4px 0 #ff2200, -4px 0 #ff2200; }
+    97% { box-shadow: none; }
+    98% { box-shadow: 2px 0 #ff0, -2px 0 #ff2200; }
+  }
+
+  .hack-revelacao b { color: #ff2200; }
+  .hack-revelacao .redacted {
+    background: #ff2200; color: #ff2200;
+    padding: 0 4px; border-radius: 2px;
+    animation: unredact 8s 3s forwards;
+  }
+  @keyframes unredact {
+    0% { background: #ff2200; color: #ff2200; }
+    100% { background: transparent; color: #ffcc00; }
+  }
+
+  .hack-video-box {
+    background: #0d0000;
+    border: 2px solid #ff2200;
+    padding: 14px 12px;
+    text-align: center;
+    margin-bottom: 14px;
+    animation: border-pulse 2s step-start infinite;
+  }
+  @keyframes border-pulse {
+    50% { border-color: #ff6600; box-shadow: 0 0 8px #ff2200; }
+  }
+
+  .hack-video-box .vt { color: #ff4400; font-size: 10px; letter-spacing: 2px; margin-bottom: 8px; }
+  .hack-video-box a {
+    display: inline-block;
+    background: #ff2200;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    animation: btn-glitch 3s infinite;
+  }
+  @keyframes btn-glitch {
+    0%,88%,100% { transform: none; }
+    90% { transform: translateX(3px); }
+    92% { transform: translateX(-3px); }
+    94% { transform: none; }
+  }
+  .hack-video-box .aviso {
+    color: #ff4400; font-size: 10px; margin-top: 6px;
+    animation: blink-red 0.6s step-start infinite;
+  }
+
+  .hack-terminal {
+    background: #0d0000;
+    border: 1px solid #440000;
+    padding: 8px 10px;
+    font-size: 10px;
+    color: #882200;
+    line-height: 1.8;
+    max-height: 140px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .hack-terminal .cursor {
+    display: inline-block;
+    width: 7px; height: 12px;
+    background: #ff2200;
+    animation: blink-red 0.7s step-start infinite;
+    vertical-align: middle;
+  }
+
+  #hack-screen::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0,0,0,0.18) 2px,
+      rgba(0,0,0,0.18) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #hack-screen > * { position: relative; z-index: 2; }
+
+  .hack-footer {
+    text-align: center;
+    color: #440000;
+    font-size: 10px;
+    padding: 10px 0 16px;
+    letter-spacing: 2px;
+  }
+</style>
+<div id="hack-screen">
+  <div class="hack-header">⚠ SISTEMA COMPROMETIDO ⚠</div>
+  <div class="hack-subtitle">[ ACESSO NÃO AUTORIZADO DETECTADO — DADOS VAZADOS ]</div>
+  <hr class="hack-divider">
+
+  <div class="hack-body">
+    <div class="hack-left">
+      <div class="hack-section-title">// log de intrusão</div>
+      <div class="hack-log">
+        <span>[00:00:01]</span> Iniciando conexão...<br>
+        <span>[00:00:03]</span> Firewall da Ordem: <span class="warn">BYPASSADO</span><br>
+        <span>[00:00:05]</span> Criptografia RC4: <span class="ok">QUEBRADA</span><br>
+        <span>[00:00:07]</span> Acesso ao servidor: <span class="ok">CONCEDIDO</span><br>
+        <span>[00:00:09]</span> Dumping arquivos secretos...<br>
+        <span>[00:00:11]</span> <span class="warn">ATENÇÃO: administrador detectado</span><br>
+        <span>[00:00:12]</span> Contra-medidas: <span class="ok">NEUTRALIZADAS</span><br>
+        <span>[00:00:14]</span> Upload completo. <span class="ok">VERDADE EXPOSTA.</span>
+      </div>
+
+      <div class="hack-section-title">// arquivo vazado — nível: ALTO SECRETO</div>
+      <div class="hack-revelacao">
+        <b>DOCUMENTO #KFP-0013 — USO INTERNO</b><br><br>
+        A organização não é o que aparenta ser.<br>
+        Os <span class="redacted">████████</span> são controlados por <span class="redacted">███████████</span>.<br>
+        O verdadeiro propósito dos centros em <span class="redacted">████</span>, Áustria e Itália<br>
+        é <span class="redacted">████████████████████████████</span>.<br><br>
+        Os membros <b>não sabem</b> o que assinaram.<br>
+        Os cookies não são só cookies.<br><br>
+        <b>— Fonte anônima, membro desde 2001</b>
+      </div>
+
+      <div class="hack-section-title">// terminal ativo</div>
+      <div class="hack-terminal" id="terminal-output">
+        C:\ORDEM\secreto&gt; dir /s /ah<br>
+        C:\ORDEM\secreto\membros_reais.dat<br>
+        C:\ORDEM\secreto\rituais.enc<br>
+        C:\ORDEM\secreto\lista_sacrificios.xls<br>
+        C:\ORDEM\secreto\cookies_verdadeiros.db<br>
+        C:\ORDEM\secreto\ina_sabe.txt<br>
+        <br>
+        C:\ORDEM\secreto&gt; type ina_sabe.txt<br>
+        ela sabe de tudo desde o inicio<br>
+        nao confie no site<br>
+        <br>
+        C:\ORDEM\secreto&gt; <span class="cursor"></span>
+      </div>
+    </div>
+
+    <div class="hack-right">
+      <div class="hack-section-title">// vídeo vazado</div>
+      <div class="hack-video-box">
+        <div class="vt">[ GRAVAÇÃO INTERNA — NÃO DIVULGAR ]</div>
+        <a href="URL_DO_VIDEO_AQUI" target="_blank">▶ ASSISTIR AGORA</a>
+        <div class="aviso">⚠ LINK PODE SUMIR A QUALQUER MOMENTO</div>
+      </div>
+
+      <div class="hack-section-title">// quem vazou</div>
+      <div class="hack-revelacao" style="font-size:11px;">
+        Ex-membro de alto escalão.<br>
+        Entrou na ordem em <b>1999</b>.<br>
+        Desapareceu em <b>março de 2001</b>.<br>
+        Voltou com <b>tudo</b>.<br><br>
+        Identidade protegida.<br>
+        <span class="redacted">██████████████</span>
+      </div>
+
+      <div class="hack-section-title">// alerta</div>
+      <div class="hack-log" style="font-size:10px;">
+        Esta página vai ser<br>
+        <span class="warn">APAGADA</span> em breve.<br>
+        <br>
+        Salve. Compartilhe.<br>
+        <span class="ok">Eles não podem calar.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hack-footer">
+    KFP-LEAK-2001 &nbsp;|&nbsp; NÃO SOMOS AFILIADOS &nbsp;|&nbsp; A VERDADE NÃO PODE SER DELETADA
+  </div>
+</div>
+
+<div class="y2k-root" id="site-normal">
   <div class="titlebar">
     <span>🌐 Bem-vindo ao MeuSite2001 — Microsoft Internet Explorer</span>
     <div class="titlebar-btns">
@@ -361,56 +655,56 @@
   </div>
 
   <div class="content-area">
-    <div class="site-header">★ BEM-VINDO AO MEU SITE PESSOAL ★</div>
+    <div class="site-header">★ A ORDEM DO FUNDO ★</div>
 
     <div class="marquee-bar">
       <span class="marquee-inner">
-        ✦ NOVIDADES: Adicionei novas fotos no álbum! ✦ VISITE MINHA PÁGINA DE LINKS ✦ Assine meu livro de visitas! ✦ Este site é compatível com IE 6.0 e Netscape 4.x ✦ 800x600 recomendado ✦
+        ✦ NOVIDADES: Novos centros de meditação inaugurados no Brasil, Áustria e Itália ✦ Membros com 35% de desconto no KFP (apresentar carteirinha) ✦ A Sacerdotisa vela por todos nós ✦ Não compartilhe segredos da Ordem com não-membros ✦
       </span>
     </div>
 
     <div class="main-layout">
       <div class="sidebar">
         <div class="sidebar-title">✦ MENU ✦</div>
-        <a href="#">🏠 Início</a>
-        <a href="#">👤 Sobre Mim</a>
-        <a href="#">📷 Fotos</a>
-        <a href="#">💬 Recados</a>
-        <a href="#">🎵 Música</a>
-        <a href="#">🔗 Links</a>
-        <a href="#">📧 Contato</a>
-        <a href="#">📝 Livro de Visitas</a>
-        <div class="sidebar-banner">⚠️ CLIQUE AQUI ⚠️<br>PERCA SUA ALMA!!</div>
+        <a href="#" class="erro-link">🏠 Início</a>
+        <a href="#" class="erro-link">🌊 Sobre a Ordem</a>
+        <a href="#" class="erro-link">📖 Os Ensinamentos</a>
+        <a href="#" class="erro-link">🕯️ Testemunhos</a>
+        <a href="#" class="erro-link">🎵 Meditações</a>
+        <a href="#">🔗 Links Sagrados</a>
+        <a href="#" class="erro-link">📧 Contato</a>
+        <a href="#" class="erro-link">📝 Junte-se a Nós</a>
+        <div class="sidebar-banner erro-link">✦ VOCÊ FOI ESCOLHIDO ✦ <br>NÃO IGNORE ESTE SINAL</div>
         <div class="hit-counter" style="margin-top:10px;">
-          <div style="color:yellow; font-size:10px; margin-bottom:2px;">Visitas:</div>
-          <div class="hit-number">004872</div>
+          <div style="color:yellow; font-size:10px; margin-bottom:2px;">Membros:</div>
+          <div class="hit-number">1656246</div>
         </div>
       </div>
 
       <div class="main-content">
         <div class="welcome-box">
-          <h2>🌟 Olá, visitante! Bem-vindo(a)!</h2>
+          <h2>🌟 Olá, visitante. Você não chegou aqui por acidente.</h2>
           <div class="gif-row">
-            <div class="fake-gif">⭐</div>
-            <div class="fake-gif2">💡</div>
-            <div class="fake-gif">🌀</div>
+            <div class="fake-gif">🐙</div>
+            <div class="fake-gif2">⭐</div>
+            <div class="fake-gif">🌊</div>
           </div>
-          Este é o meu cantinho na internet! Aqui você vai encontrar informações sobre mim, minhas músicas favoritas, fotos e muito mais. <b>Não esqueça de deixar seu recado!</b> 😊
+          Seja bem-vindo(a) à página oficial da Ordem da Sacerdotisa <br> uma comunidade de pessoas que encontraram paz, propósito e pertencimento sob a orientação d'Ela.<br>Aqui você vai encontrar nossos ensinamentos, depoimentos de membros e tudo que precisa para dar o próximo passo. Não esqueça de deixar seu recado. <b>Ela lê todos</b>. 🐙
         </div>
 
-        <div class="banner-ad">🎰 CLIQUE AQUI E GANHE UM COOKIE! 🎰</div>
+        <div class="banner-ad erro-link">🐙 VOCÊ JÁ SENTIU QUE ALGO ESTAVA FALTANDO? CLIQUE AQUI. 🐙</div>
 
         <div class="news-title">📰 Últimas Novidades</div>
-        <div class="news-item"><span class="new-badge">NEW</span> <a href="#">Adicionei 15 novas fotos na galeria!</a> <span style="color:#888;">(12/03/2001)</span></div>
-        <div class="news-item"><span class="new-badge">NEW</span> <a href="#">Minha página de links foi atualizada</a> <span style="color:#888;">(08/03/2001)</span></div>
-        <div class="news-item"><a href="#">Fiz um novo layout! O que acharam?</a> <span style="color:#888;">(01/03/2001)</span></div>
-        <div class="news-item"><a href="#">Coloquei nova música de fundo 🎵</a> <span style="color:#888;">(22/02/2001)</span></div>
+        <div class="news-item"><span class="new-badge">NEW</span> <a href="#" class="erro-link">Centros de meditação com vagas abertas — inscrições até 30/03</a> <span style="color:#888;">(12/03/2001)</span></div>
+        <div class="news-item"><span class="new-badge">NEW</span> <a href="#" class="erro-link">Novo arquivo de ensinamentos disponível na seção Testemunhos</a> <span style="color:#888;">(08/03/2001)</span></div>
+        <div class="news-item"><a href="#" class="erro-link">Carta aberta da Sacerdotisa aos novos membros — leitura obrigatória</a> <span style="color:#888;">(01/03/2001)</span></div>
+        <div class="news-item"><a href="#" class="erro-link">Alcançamos 1,5 milhão de membros ao redor do mundo!!</a> <span style="color:#888;">(22/02/2001)</span></div>
 
-        <div class="news-title" style="margin-top:10px;">👥 Livro de Visitas — Deixe seu recado!</div>
+        <div class="news-title" style="margin-top:10px;">📖 Livro de Visitas — Ela está ouvindo</div>
         <div class="guestbook-form">
-          <input type="text" placeholder="Seu nome" />
-          <input type="text" placeholder="Sua mensagem..." />
-          <button>Enviar Recado!</button>
+          <input type="text" placeholder="Seu nome (ou como deseja ser chamado)" />
+          <input type="text" placeholder="O que te trouxe até aqui?" />
+          <button class="erro-link">Enviar mensagem</button>
         </div>
 
         <table class="retro-table" style="margin-top:10px;">
@@ -418,37 +712,59 @@
           <tr><td>Nome</td><td>Ninomae Ina'nis</td></tr>
           <tr><td>Cidade</td><td>Espirito Santo - ES</td></tr>
           <tr><td>ICQ</td><td>13092020</td></tr>
-          <tr><td>MSN</td><td>fulano@hotmail.com</td></tr>
+          <tr><td>MSN</td><td>sacerdotisa@hotmail.com</td></tr>
           <tr><td>Signo</td><td>Touro ♉</td></tr>
         </table>
 
         <div class="under-construction" style="margin-top:10px;">
-          🚧 SEÇÃO EM CONSTRUÇÃO — VOLTE EM BREVE! 🚧
+          🚧 ARQUIVOS RESTRITOS — ACESSO APENAS PARA MEMBROS CONFIRMADOS 🚧
         </div>
       </div>
 
       <div class="right-col">
         <div class="right-col-title">📊 ENQUETE</div>
-        <div style="font-size:11px; margin-bottom:4px;">Qual é seu browser?</div>
-        <div class="poll-option"><label><input type="radio" name="poll"> IE 6</label></div>
-        <div class="poll-option"><label><input type="radio" name="poll"> Netscape</label></div>
-        <div class="poll-option"><label><input type="radio" name="poll"> Opera</label></div>
-        <button class="poll-btn">Votar!</button>
+        <div style="font-size:11px; margin-bottom:4px;">O que te trouxe até a Ordem?</div>
+        <div class="poll-option"><label><input type="radio" name="poll"> Um sonho que não consigo esquecer</label></div>
+        <div class="poll-option"><label><input type="radio" name="poll"> Senti que era chamado(a)</label></div>
+        <div class="poll-option"><label><input type="radio" name="poll"> Senti que era chamado(a)</label></div>
+        <div class="poll-option"><label><input type="radio" name="poll"> Encontrei o site por acidente (ou foi?)</label></div>
+        <div class="poll-option"><label><input type="radio" name="poll"> Ainda estou descobrindo</label></div>
+        <button class="poll-btn erro-link">Votar!</button>
 
-        <div class="right-col-title" style="margin-top:10px;">🌡️ TEMPO</div>
-        <div style="font-size:11px;">São Paulo, SP<br><b>☀️ 29°C</b><br>Ensolarado</div>
-
-        <div class="right-col-title" style="margin-top:10px;">🔥 TOP LINKS</div>
+        <div class="right-col-title" style="margin-top:10px;">🔥 MEMBROS EM DESTAQUE</div>
         <div style="font-size:11px;">
-          <a href="#" style="color:#000080; display:block; padding:2px 0;">» Google</a>
-          <a href="#" style="color:#000080; display:block; padding:2px 0;">» Orkut</a>
-          <a href="#" style="color:#000080; display:block; padding:2px 0;">» UOL</a>
-          <a href="#" style="color:#000080; display:block; padding:2px 0;">» Terra</a>
-          <a href="#" style="color:#000080; display:block; padding:2px 0;">» ICQ</a>
+          <table class="membros">
+          <tr><td>Flare</td>
+          <tr><td>Takodachi #4637</td>
+          <tr><td>Leuco</td>
+          <tr><td>Carlos V.</td>
+          <tr><td>João</td>
+        </table>
+        </div>
+
+        <div class="right-col-title" style="margin-top:10px;"> 💲 Patrocinador</div>
+          <img src="assets/KFP.png" alt="" height="100px" width="125px">
         </div>
 
         <div style="font-size:10px; color:#888; margin-top:10px; text-align:center;">
-          Melhor em<br>800x600px<br>IE 5.5+
+         
+        </div>
+        <div id="error-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.35);z-index:999;align-items:center;justify-content:center;">
+          <div style="background:#c0c0c0;border-top:2px solid #fff;border-left:2px solid #fff;border-bottom:2px solid #555;border-right:2px solid #555;width:320px;font-family:Verdana,sans-serif;font-size:12px;position:relative;">
+            <div style="background:linear-gradient(to right,#000080,#1084d0);color:white;font-weight:bold;font-size:12px;padding:3px 6px;display:flex;justify-content:space-between;">
+              <span>⚠️ Erro de Script — Microsoft Internet Explorer</span>
+              <span onclick="closeError()" style="background:#c0c0c0;color:#000;border-top:1px solid #fff;border-left:1px solid #fff;border-bottom:1px solid #555;border-right:1px solid #555;width:16px;height:14px;text-align:center;line-height:12px;cursor:pointer;font-weight:bold;">✕</span>
+            </div>
+            <div style="padding:14px 16px 10px;display:flex;gap:12px;">
+            <div style="font-size:32px;">🛑</div>
+              <div style="font-size:12px;line-height:1.5;">
+                <b>Ocorreu um erro nesta página.</b><br><br>
+                Linha: <b id="err-line">42</b><br>Caractere: <b>1</b><br>
+                Erro: <b id="err-msg">Object expected</b><br>Código: <b>0</b><br>
+                URL: <b>http://www.meusite2001.com.br/</b><br><br>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -459,3 +775,34 @@
     <span>🌐 Internet</span>
   </div>
 </div>
+<script>
+
+  if (Math.random() < 0.15) {
+    document.getElementById('hack-screen').classList.add('ativo');
+    document.getElementById('site-normal').style.display = 'none';
+  }
+
+const errors = [
+  {line:42,  msg:"Object expected"},
+  {line:17,  msg:"'undefined' is null or not an object"},
+  {line:88,  msg:"Automation server can't create object"},
+  {line:5,   msg:"Permission denied"},
+  {line:131, msg:"Stack overflow at line: 0"},
+  {line:23,  msg:"Access is denied"},
+];
+
+function showError() {
+  const e = errors[Math.floor(Math.random() * errors.length)];
+  document.getElementById('err-line').textContent = e.line;
+  document.getElementById('err-msg').textContent = e.msg;
+  document.getElementById('error-overlay').classList.add('show');
+}
+
+function closeError() {
+  document.getElementById('error-overlay').classList.remove('show');
+}
+
+document.querySelectorAll('.erro-link').forEach(el => {
+  el.addEventListener('click', e => { e.preventDefault(); showError(); });
+});
+</script>
