@@ -1,4 +1,5 @@
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Verdana&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
@@ -545,65 +546,156 @@
     padding: 10px 0 16px;
     letter-spacing: 2px;
   }
+
+  /* ── RESPONSIVE / MOBILE ── */
+  @media (max-width: 600px) {
+
+    /* Toolbar: hide nav buttons, keep address bar */
+    .toolbar {
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+    .toolbar-btn {
+      padding: 3px 6px;
+      font-size: 10px;
+    }
+    .address-bar {
+      width: 100%;
+      font-size: 11px;
+    }
+
+    /* Menubar: allow wrapping */
+    .menubar {
+      flex-wrap: wrap;
+      gap: 6px 10px;
+    }
+
+    /* Main layout: stack sidebar → content → right col */
+    .main-layout {
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      min-width: unset;
+      border-right: none;
+      border-bottom: 2px solid #0000aa;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      padding: 6px 8px;
+    }
+    .sidebar-title {
+      width: 100%;
+      margin-bottom: 2px;
+    }
+    .sidebar a {
+      display: inline-block;
+      padding: 3px 6px;
+      background: #0000aa;
+      font-size: 11px;
+    }
+    .sidebar-banner {
+      margin-top: 4px;
+      width: auto;
+    }
+    .hit-counter {
+      margin-top: 4px;
+    }
+
+    .main-content {
+      padding: 8px;
+    }
+
+    /* Right column goes below main content */
+    .right-col {
+      width: 100%;
+      min-width: unset;
+      border-left: none;
+      border-top: 1px solid #ccc;
+    }
+
+    /* Header font size */
+    .site-header {
+      font-size: 16px;
+      letter-spacing: 1px;
+      padding: 6px;
+    }
+
+    /* Retro table scrollable */
+    table.retro-table {
+      display: block;
+      overflow-x: auto;
+    }
+
+    /* Guestbook inputs full width */
+    .guestbook-form input[type=text] {
+      width: 100%;
+    }
+
+    /* Error overlay dialog */
+    #error-overlay > div {
+      width: 90vw !important;
+      max-width: 320px;
+    }
+
+    /* Hack screen responsive */
+    .hack-body {
+      flex-direction: column;
+      padding: 0 12px;
+    }
+    .hack-left {
+      padding-right: 0;
+      border-right: none;
+      border-bottom: 1px solid #550000;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+    .hack-right {
+      width: 100%;
+      padding-left: 0;
+    }
+    .hack-header {
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 14px 10px 4px;
+    }
+    .hack-divider {
+      margin: 0 12px 12px;
+    }
+    .hack-terminal {
+      max-height: 120px;
+      font-size: 9px;
+    }
+  }
 </style>
 <div id="hack-screen">
-  <div class="hack-header">⚠ SISTEMA COMPROMETIDO ⚠</div>
-  <div class="hack-subtitle">[ ACESSO NÃO AUTORIZADO DETECTADO — DADOS VAZADOS ]</div>
-  <hr class="hack-divider">
+  <div class="hack-header" id="tw-header" style="visibility:hidden;">⚠ SISTEMA COMPROMETIDO ⚠</div>
+  <div class="hack-subtitle" id="tw-subtitle" style="visibility:hidden;"></div>
+  <hr class="hack-divider" id="tw-divider" style="visibility:hidden;">
 
-  <div class="hack-body">
+  <div class="hack-body" id="tw-body" style="visibility:hidden;">
     <div class="hack-left">
-      <div class="hack-section-title">// log de intrusão</div>
-      <div class="hack-log">
-        <span>[00:00:01]</span> Iniciando conexão...<br>
-        <span>[00:00:03]</span> Firewall da Ordem: <span class="warn">BYPASSADO</span><br>
-        <span>[00:00:05]</span> Criptografia RC4: <span class="ok">QUEBRADA</span><br>
-        <span>[00:00:07]</span> Acesso ao servidor: <span class="ok">CONCEDIDO</span><br>
-        <span>[00:00:09]</span> Dumping arquivos secretos...<br>
-        <span>[00:00:11]</span> <span class="warn">ATENÇÃO: administrador detectado</span><br>
-        <span>[00:00:12]</span> Contra-medidas: <span class="ok">NEUTRALIZADAS</span><br>
-        <span>[00:00:14]</span> Upload completo. <span class="ok">VERDADE EXPOSTA.</span>
-      </div>
+      <div class="hack-section-title" id="tw-log-title"></div>
+      <div class="hack-log" id="tw-log"></div>
 
-      <div class="hack-section-title">// arquivo vazado — nível: ALTO SECRETO</div>
-      <div class="hack-revelacao">
-        <b>DOCUMENTO #KFP-0013 — USO INTERNO</b><br><br>
-        A organização não é o que aparenta ser.<br>
-        Os <span class="redacted">████████</span> são controlados por <span class="redacted">███████████</span>.<br>
-        O verdadeiro propósito dos centros em <span class="redacted">████</span>, Áustria e Itália<br>
-        é <span class="redacted">████████████████████████████</span>.<br><br>
-        Os membros <b>não sabem</b> o que assinaram.<br>
-        Os cookies não são só cookies.<br><br>
-        <b>— Fonte anônima, membro desde 2001</b>
-      </div>
+      <div class="hack-section-title" id="tw-doc-title"></div>
+      <div class="hack-revelacao" id="tw-doc" style="display:none;"></div>
 
-      <div class="hack-section-title">// terminal ativo</div>
-      <div class="hack-terminal" id="terminal-output">
-        C:\ORDEM\secreto&gt; dir /s /ah<br>
-        C:\ORDEM\secreto\membros_reais.dat<br>
-        C:\ORDEM\secreto\rituais.enc<br>
-        C:\ORDEM\secreto\lista_sacrificios.xls<br>
-        C:\ORDEM\secreto\cookies_verdadeiros.db<br>
-        C:\ORDEM\secreto\ina_sabe.txt<br>
-        <br>
-        C:\ORDEM\secreto&gt; type ina_sabe.txt<br>
-        ela sabe de tudo desde o inicio<br>
-        nao confie no site<br>
-        <br>
-        C:\ORDEM\secreto&gt; <span class="cursor"></span>
-      </div>
+      <div class="hack-section-title" id="tw-term-title"></div>
+      <div class="hack-terminal" id="terminal-output"></div>
     </div>
 
-    <div class="hack-right">
-      <div class="hack-section-title">// vídeo vazado</div>
-      <div class="hack-video-box">
+    <div class="hack-right" id="tw-right" style="visibility:hidden;">
+      <div class="hack-section-title" id="tw-vid-title"></div>
+      <div class="hack-video-box" id="tw-vid-box" style="display:none;">
         <div class="vt">[ GRAVAÇÃO INTERNA — NÃO DIVULGAR ]</div>
         <a href="URL_DO_VIDEO_AQUI" target="_blank">▶ ASSISTIR AGORA</a>
         <div class="aviso">⚠ LINK PODE SUMIR A QUALQUER MOMENTO</div>
       </div>
 
-      <div class="hack-section-title">// quem vazou</div>
-      <div class="hack-revelacao" style="font-size:11px;">
+      <div class="hack-section-title" id="tw-quem-title"></div>
+      <div class="hack-revelacao" id="tw-quem" style="font-size:11px; display:none;">
         Ex-membro de alto escalão.<br>
         Entrou na ordem em <b>1999</b>.<br>
         Desapareceu em <b>março de 2001</b>.<br>
@@ -612,8 +704,8 @@
         <span class="redacted">██████████████</span>
       </div>
 
-      <div class="hack-section-title">// alerta</div>
-      <div class="hack-log" style="font-size:10px;">
+      <div class="hack-section-title" id="tw-alerta-title"></div>
+      <div class="hack-log" id="tw-alerta" style="font-size:10px; display:none;">
         Esta página vai ser<br>
         <span class="warn">APAGADA</span> em breve.<br>
         <br>
@@ -623,7 +715,7 @@
     </div>
   </div>
 
-  <div class="hack-footer">
+  <div class="hack-footer" id="tw-footer" style="visibility:hidden;">
     KFP-LEAK-2001 &nbsp;|&nbsp; NÃO SOMOS AFILIADOS &nbsp;|&nbsp; A VERDADE NÃO PODE SER DELETADA
   </div>
 </div>
@@ -777,9 +869,181 @@
 </div>
 <script>
 
+// ── TYPEWRITER ENGINE ──────────────────────────────────────────────
+function typeText(el, text, speed, done) {
+  el.textContent = '';
+  let i = 0;
+  function tick() {
+    if (i < text.length) {
+      el.textContent += text[i++];
+      setTimeout(tick, speed + Math.random() * speed * 0.6);
+    } else {
+      if (done) done();
+    }
+  }
+  tick();
+}
+
+// Types plain text into el char by char, then calls done
+// For HTML content we reveal line by line with a small delay
+function revealLines(el, htmlLines, lineDelay, done) {
+  el.style.display = '';
+  el.innerHTML = '';
+  let i = 0;
+  function nextLine() {
+    if (i < htmlLines.length) {
+      const span = document.createElement('span');
+      span.innerHTML = htmlLines[i++] + (i < htmlLines.length ? '<br>' : '');
+      el.appendChild(span);
+      span.style.opacity = '0';
+      // fade-in feel
+      requestAnimationFrame(() => {
+        span.style.transition = 'opacity 0.15s';
+        span.style.opacity = '1';
+      });
+      setTimeout(nextLine, lineDelay + Math.random() * lineDelay * 0.5);
+    } else {
+      if (done) done();
+    }
+  }
+  nextLine();
+}
+
+function runHackTypewriter() {
+  const delay = (ms) => new Promise(r => setTimeout(r, ms));
+
+  // blinking cursor helper appended while typing section titles
+  async function typeTitle(el, text, speed = 55) {
+    return new Promise(resolve => {
+      el.textContent = '';
+      el.style.borderBottom = '1px solid #550000';
+      typeText(el, text, speed, resolve);
+    });
+  }
+
+  async function go() {
+    // 1. Header glitches in
+    await delay(200);
+    document.getElementById('tw-header').style.visibility = 'visible';
+
+    // 2. Subtitle typed
+    await delay(400);
+    const sub = document.getElementById('tw-subtitle');
+    sub.style.visibility = 'visible';
+    await new Promise(r => typeText(sub, '[ ACESSO NÃO AUTORIZADO DETECTADO — DADOS VAZADOS ]', 35, r));
+
+    // 3. Divider appears
+    await delay(200);
+    document.getElementById('tw-divider').style.visibility = 'visible';
+
+    // 4. Show body shell
+    await delay(100);
+    document.getElementById('tw-body').style.visibility = 'visible';
+
+    // 5. Log section title
+    await typeTitle(document.getElementById('tw-log-title'), '// log de intrusão', 60);
+    await delay(150);
+
+    // 6. Log lines one by one
+    const logLines = [
+      '<span>[00:00:01]</span> Iniciando conexão...',
+      '<span>[00:00:03]</span> Firewall da Ordem: <span class="warn">BYPASSADO</span>',
+      '<span>[00:00:05]</span> Criptografia RC4: <span class="ok">QUEBRADA</span>',
+      '<span>[00:00:07]</span> Acesso ao servidor: <span class="ok">CONCEDIDO</span>',
+      '<span>[00:00:09]</span> Dumping arquivos secretos...',
+      '<span>[00:00:11]</span> <span class="warn">ATENÇÃO: administrador detectado</span>',
+      '<span>[00:00:12]</span> Contra-medidas: <span class="ok">NEUTRALIZADAS</span>',
+      '<span>[00:00:14]</span> Upload completo. <span class="ok">VERDADE EXPOSTA.</span>',
+    ];
+    await new Promise(r => revealLines(document.getElementById('tw-log'), logLines, 380, r));
+    await delay(300);
+
+    // 7. Doc section title
+    await typeTitle(document.getElementById('tw-doc-title'), '// arquivo vazado — nível: ALTO SECRETO', 50);
+    await delay(200);
+
+    // 8. Doc lines
+    const docLines = [
+      '<b>DOCUMENTO #KFP-0013 — USO INTERNO</b>',
+      '',
+      'A organização não é o que aparenta ser.',
+      'Os <span class="redacted">████████</span> são controlados por <span class="redacted">███████████</span>.',
+      'O verdadeiro propósito dos centros em <span class="redacted">████</span>, Áustria e Itália',
+      'é <span class="redacted">████████████████████████████</span>.',
+      '',
+      'Os membros <b>não sabem</b> o que assinaram.',
+      'Os cookies não são só cookies.',
+      '',
+      '<b>— Fonte anônima, membro desde 2001</b>',
+    ];
+    await new Promise(r => revealLines(document.getElementById('tw-doc'), docLines, 260, r));
+    await delay(300);
+
+    // 9. Terminal section title
+    await typeTitle(document.getElementById('tw-term-title'), '// terminal ativo', 60);
+    await delay(150);
+
+    // 10. Terminal lines typed out
+    const termEl = document.getElementById('terminal-output');
+    termEl.innerHTML = '';
+    const termLines = [
+      'C:\\ORDEM\\secreto> dir /s /ah',
+      'C:\\ORDEM\\secreto\\membros_reais.dat',
+      'C:\\ORDEM\\secreto\\rituais.enc',
+      'C:\\ORDEM\\secreto\\lista_sacrificios.xls',
+      'C:\\ORDEM\\secreto\\cookies_verdadeiros.db',
+      'C:\\ORDEM\\secreto\\ina_sabe.txt',
+      '',
+      'C:\\ORDEM\\secreto> type ina_sabe.txt',
+      'ela sabe de tudo desde o inicio',
+      'nao confie no site',
+      '',
+    ];
+    for (const line of termLines) {
+      await new Promise(r => {
+        const row = document.createElement('div');
+        termEl.appendChild(row);
+        if (line === '') { row.innerHTML = '&nbsp;'; r(); return; }
+        typeText(row, line, 28, r);
+      });
+      await delay(60);
+    }
+    // blinking cursor at end
+    const cursorRow = document.createElement('div');
+    cursorRow.innerHTML = 'C:\\ORDEM\\secreto> <span class="cursor"></span>';
+    termEl.appendChild(cursorRow);
+
+    // 11. Right column appears
+    await delay(400);
+    document.getElementById('tw-right').style.visibility = 'visible';
+
+    await typeTitle(document.getElementById('tw-vid-title'), '// vídeo vazado', 60);
+    await delay(150);
+    document.getElementById('tw-vid-box').style.display = '';
+
+    await delay(300);
+    await typeTitle(document.getElementById('tw-quem-title'), '// quem vazou', 60);
+    await delay(150);
+    document.getElementById('tw-quem').style.display = '';
+
+    await delay(300);
+    await typeTitle(document.getElementById('tw-alerta-title'), '// alerta', 60);
+    await delay(150);
+    document.getElementById('tw-alerta').style.display = '';
+
+    // 12. Footer
+    await delay(500);
+    document.getElementById('tw-footer').style.visibility = 'visible';
+  }
+
+  go();
+}
+// ── END TYPEWRITER ENGINE ──────────────────────────────────────────
+
   if (Math.random() < 0.15) {
     document.getElementById('hack-screen').classList.add('ativo');
     document.getElementById('site-normal').style.display = 'none';
+    runHackTypewriter();
   }
 
 const errors = [
