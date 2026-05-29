@@ -224,7 +224,6 @@
     padding: 3px;
     margin: 8px 0;
     cursor: pointer;
-    animation: banner-flash 2s step-start infinite;
   }
   @keyframes banner-flash { 50% { background: #ff6600; color: white; } }
   .hit-counter {
@@ -367,7 +366,6 @@
   }
   #hack-screen.ativo { display: block; }
 
-  /* glitch no título */
   .hack-header {
     text-align: center;
     padding: 18px 0 6px;
@@ -547,10 +545,8 @@
     letter-spacing: 2px;
   }
 
-  /* ── RESPONSIVE / MOBILE ── */
   @media (max-width: 600px) {
 
-    /* Toolbar: hide nav buttons, keep address bar */
     .toolbar {
       flex-wrap: wrap;
       gap: 3px;
@@ -564,13 +560,11 @@
       font-size: 11px;
     }
 
-    /* Menubar: allow wrapping */
     .menubar {
       flex-wrap: wrap;
       gap: 6px 10px;
     }
 
-    /* Main layout: stack sidebar → content → right col */
     .main-layout {
       flex-direction: column;
     }
@@ -869,7 +863,6 @@
 </div>
 <script>
 
-// ── TYPEWRITER ENGINE ──────────────────────────────────────────────
 function typeText(el, text, speed, done) {
   el.textContent = '';
   let i = 0;
@@ -883,9 +876,6 @@ function typeText(el, text, speed, done) {
   }
   tick();
 }
-
-// Types plain text into el char by char, then calls done
-// For HTML content we reveal line by line with a small delay
 function revealLines(el, htmlLines, lineDelay, done) {
   el.style.display = '';
   el.innerHTML = '';
@@ -896,7 +886,6 @@ function revealLines(el, htmlLines, lineDelay, done) {
       span.innerHTML = htmlLines[i++] + (i < htmlLines.length ? '<br>' : '');
       el.appendChild(span);
       span.style.opacity = '0';
-      // fade-in feel
       requestAnimationFrame(() => {
         span.style.transition = 'opacity 0.15s';
         span.style.opacity = '1';
@@ -912,7 +901,6 @@ function revealLines(el, htmlLines, lineDelay, done) {
 function runHackTypewriter() {
   const delay = (ms) => new Promise(r => setTimeout(r, ms));
 
-  // blinking cursor helper appended while typing section titles
   async function typeTitle(el, text, speed = 55) {
     return new Promise(resolve => {
       el.textContent = '';
@@ -922,29 +910,24 @@ function runHackTypewriter() {
   }
 
   async function go() {
-    // 1. Header glitches in
+
     await delay(200);
     document.getElementById('tw-header').style.visibility = 'visible';
 
-    // 2. Subtitle typed
     await delay(400);
     const sub = document.getElementById('tw-subtitle');
     sub.style.visibility = 'visible';
     await new Promise(r => typeText(sub, '[ ACESSO NÃO AUTORIZADO DETECTADO — DADOS VAZADOS ]', 35, r));
 
-    // 3. Divider appears
     await delay(200);
     document.getElementById('tw-divider').style.visibility = 'visible';
 
-    // 4. Show body shell
     await delay(100);
     document.getElementById('tw-body').style.visibility = 'visible';
 
-    // 5. Log section title
     await typeTitle(document.getElementById('tw-log-title'), '// log de intrusão', 60);
     await delay(150);
 
-    // 6. Log lines one by one
     const logLines = [
       '<span>[00:00:01]</span> Iniciando conexão...',
       '<span>[00:00:03]</span> Firewall da Ordem: <span class="warn">BYPASSADO</span>',
@@ -958,11 +941,9 @@ function runHackTypewriter() {
     await new Promise(r => revealLines(document.getElementById('tw-log'), logLines, 380, r));
     await delay(300);
 
-    // 7. Doc section title
     await typeTitle(document.getElementById('tw-doc-title'), '// arquivo vazado — nível: ALTO SECRETO', 50);
     await delay(200);
 
-    // 8. Doc lines
     const docLines = [
       '<b>DOCUMENTO #KFP-0013 — USO INTERNO</b>',
       '',
@@ -979,11 +960,9 @@ function runHackTypewriter() {
     await new Promise(r => revealLines(document.getElementById('tw-doc'), docLines, 260, r));
     await delay(300);
 
-    // 9. Terminal section title
     await typeTitle(document.getElementById('tw-term-title'), '// terminal ativo', 60);
     await delay(150);
 
-    // 10. Terminal lines typed out
     const termEl = document.getElementById('terminal-output');
     termEl.innerHTML = '';
     const termLines = [
@@ -1008,12 +987,10 @@ function runHackTypewriter() {
       });
       await delay(60);
     }
-    // blinking cursor at end
     const cursorRow = document.createElement('div');
     cursorRow.innerHTML = 'C:\\ORDEM\\secreto> <span class="cursor"></span>';
     termEl.appendChild(cursorRow);
 
-    // 11. Right column appears
     await delay(400);
     document.getElementById('tw-right').style.visibility = 'visible';
 
@@ -1038,8 +1015,6 @@ function runHackTypewriter() {
 
   go();
 }
-// ── END TYPEWRITER ENGINE ──────────────────────────────────────────
-
   if (Math.random() < 0.15) {
     document.getElementById('hack-screen').classList.add('ativo');
     document.getElementById('site-normal').style.display = 'none';
